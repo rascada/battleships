@@ -26,6 +26,14 @@ export default {
   },
 
   events: {
+    shipDiscovered(id) {
+      const $field = this.getField(id);
+
+      if (this.type === 'offensive') {
+        $field.classList.add('ship');
+      }
+    },
+
     attack(target, pos) {
       if (this.type !== 'field') return;
 
@@ -39,16 +47,24 @@ export default {
 
   methods: {
     getShoot(id) {
-      const $row = this.$els.panel.children[id[0]].children[id[1]];
+      this.attack(id, this.getField(id));
+    },
 
-      this.attack(id, $row);
+    getField(id) {
+      return this.$els.panel
+        .children[id[0]]
+        .children[id[1]];
     },
 
     attack(id, $row, dispatch) {
       this.shoots.add(id);
       $row.classList.add('attacked');
 
-      if (dispatch) this.$dispatch('shoot', id);
+      if (dispatch) {
+        this.$dispatch('shoot', id);
+      } else if (this.ships.has(id)) {
+        this.$dispatch('shipPosition', id);
+      }
     },
 
     shoot(x, y, $row) {

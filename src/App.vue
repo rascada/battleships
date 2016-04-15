@@ -20,6 +20,10 @@ export default {
       }
     },
 
+    shipDiscovered(id, name) {
+      this.$broadcast('shipDiscovered', id, name);
+    },
+
     attack(name, id) {
       const player = this.players[+!this.players.indexOf(name)];
 

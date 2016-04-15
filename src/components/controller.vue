@@ -22,6 +22,14 @@ export default {
       }
     },
 
+    shipDiscovered(id, name) {
+      return this.name !== name;
+    },
+
+    shipPosition(id) {
+      this.$dispatch('shipDiscovered', id, this.name);
+    },
+
     settedShips() {
       this.$dispatch('ready', this.name);
       this.$broadcast('ready');
@@ -29,10 +37,7 @@ export default {
     },
 
     attack(target) {
-      if (target === this.name) {
-        return true;
-      }
-      return false;
+      return target === this.name;
     },
   },
 
