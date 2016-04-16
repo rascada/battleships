@@ -16,7 +16,7 @@ export default {
     ready(name) {
       this.players.push(name);
       if (this.players.length === 2) {
-        this.$broadcast('turn', this.players[0]);
+        this.$broadcast('turn', this.players[0], true);
       }
     },
 
@@ -24,11 +24,27 @@ export default {
       this.$broadcast('shipDiscovered', id, name);
     },
 
-    attack(name, id) {
-      const player = this.players[+!this.players.indexOf(name)];
+    turn(name) {
+      this.$broadcast('turn', name, false);
 
-      this.$broadcast('turn', player);
-      this.$broadcast('attack', player, id);
+      setTimeout(() => {
+        alert('Zmiana gracza');
+        this.$broadcast('turn', this.getPlayer(name), true);
+      }, 10);
+    },
+
+    attack(name, id) {
+      this.$broadcast('attack', this.getPlayer(name), id);
+    },
+  },
+
+  methods: {
+    getPlayer(name) {
+      return this.players[+!this.players.indexOf(name)];
+    },
+
+    getOriginPlayer(name) {
+      return this.players[this.players.indexOf(name)];
     },
   },
 

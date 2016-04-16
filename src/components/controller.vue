@@ -1,5 +1,5 @@
 <template>
-  <div class="controller">
+  <div v-show='msg || turn' class="controller">
     <panel :turn='turn' type='offensive'></panel>
     <div class='dashboard'> {{ msg }} {{ turn ? 'twój ruch' : '' }} </div>
     <panel type='field'></panel>
@@ -12,13 +12,15 @@ import panel from './panel';
 export default {
   events: {
     shoot(id) {
-      this.turn = false;
       this.$dispatch('attack', this.name, id);
+      setTimeout(() => {
+        this.$dispatch('turn', this.name);
+      }, 1000);
     },
 
-    turn(name) {
+    turn(name, turn) {
       if (name === this.name) {
-        this.turn = true;
+        this.turn = turn;
       }
     },
 
