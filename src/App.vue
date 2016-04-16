@@ -48,7 +48,11 @@ export default {
     ready(name) {
       this.players.push(name);
       if (this.players.length === 2) {
-        this.$broadcast('turn', this.players[0], true);
+        setTimeout(() => {
+          const player = this.players[0];
+          alert(player);
+          this.$broadcast('turn', player, true);
+        });
       }
     },
 
@@ -60,7 +64,7 @@ export default {
       this.$broadcast('turn', name, false);
 
       setTimeout(() => {
-        alert('Zmiana gracza');
+        alert(this.getPlayer(name));
         this.$broadcast('turn', this.getPlayer(name), true);
       }, 10);
     },

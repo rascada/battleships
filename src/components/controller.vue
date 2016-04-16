@@ -1,7 +1,7 @@
 <template>
   <div v-show='msg || turn' class="controller">
     <panel :turn='turn' :rad='rad' :max-ships='maxShips' type='offensive'></panel>
-    <div class='dashboard'> {{ msg }} {{ turn ? 'twój ruch' : '' }} </div>
+    <div class='dashboard'> {{ msg }} {{ turn ? 'twój ruch' : '' }} {{ name }} </div>
     <panel type='field' :rad='rad' :max-ships='maxShips'></panel>
   </div>
 </template>
@@ -42,6 +42,7 @@ export default {
     },
 
     settedShips() {
+      this.name = prompt('podaj imię');
       this.$dispatch('ready', this.name);
       this.$broadcast('ready');
       this.msg = '';
@@ -58,7 +59,7 @@ export default {
 
   data() {
     return {
-      name: Math.random() * 1000,
+      name: '',
       msg: 'Ustaw swoje statki',
       turn: false,
     };
