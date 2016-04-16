@@ -1,8 +1,8 @@
 <template>
   <div v-show='msg || turn' class="controller">
-    <panel :turn='turn' type='offensive'></panel>
+    <panel :turn='turn' :rad='rad' :max-ships='maxShips' type='offensive'></panel>
     <div class='dashboard'> {{ msg }} {{ turn ? 'twój ruch' : '' }} </div>
-    <panel type='field'></panel>
+    <panel type='field' :rad='rad' :max-ships='maxShips'></panel>
   </div>
 </template>
 
@@ -10,6 +10,11 @@
 import panel from './panel';
 
 export default {
+  props: {
+    rad: Number,
+    maxShips: Number,
+  },
+
   events: {
     shoot(id) {
       this.$dispatch('attack', this.name, id);

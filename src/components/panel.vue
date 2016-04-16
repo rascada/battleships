@@ -1,5 +1,5 @@
 <template>
-  <div class="panel" v-el:panel>
+  <div class="panel" :style='{ width: computedWidth }' v-el:panel>
     {{ remaining }}
     <div v-for='column of rad' class="column">
       <div v-for='row of rad' class="field" @click='shoot(column, row, $event.target)'> {{ column }} - {{ row }} </div>
@@ -8,12 +8,9 @@
 </template>
 
 <script>
-const maxShips = 2;
-
 export default {
   data() {
     return {
-      rad: 4,
       ready: false,
       shoots: new Set(),
       ships: new Set(),
@@ -21,8 +18,10 @@ export default {
   },
 
   props: {
+    rad: Number,
     type: String,
     turn: Boolean,
+    maxShips: Number,
   },
 
   events: {
@@ -42,6 +41,12 @@ export default {
 
     ready() {
       this.ready = true;
+    },
+  },
+
+  computed: {
+    computedWidth() {
+      return `${this.rad * 4}em`;
     },
   },
 
@@ -81,10 +86,10 @@ export default {
     },
 
     setShip(id, $row) {
-      if (!this.ships.has(id) && this.ships.size < maxShips) {
+      if (!this.ships.has(id) && this.ships.size < this.maxShips) {
         $row.classList.add('ship');
 
-        if (this.ships.add(id).size === maxShips) {
+        if (this.ships.add(id).size === this.maxShips) {
           this.$dispatch('settedShips');
         }
       }
@@ -97,7 +102,7 @@ export default {
 @import '~flexstyl/flex';
 
 .panel
-  width 18em
+  width 4em
   text-align center
 
 .field

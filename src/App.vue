@@ -1,12 +1,49 @@
 <template>
-  <controller></controller>
-  <controller></controller>
+  <controller
+    :rad='rad'
+    :max-ships='maxShips'>
+  </controller>
+
+  <settings
+    v-show='players.length === 0'
+    :max-ships.sync='maxShips'
+    :rad.sync='rad'>
+  </settings>
+
+  <controller
+    :rad='rad'
+    :max-ships='maxShips'>
+  </controller>
 </template>
 
 <script>
 import controller from './components/controller';
+import settings from './components/settings';
 
 export default {
+  components: {
+    controller,
+    settings,
+  },
+
+  data() {
+    return {
+      rad: 3,
+      maxShips: 3,
+      players: [],
+    };
+  },
+
+  methods: {
+    getPlayer(name) {
+      return this.players[+!this.players.indexOf(name)];
+    },
+
+    getOriginPlayer(name) {
+      return this.players[this.players.indexOf(name)];
+    },
+  },
+
   events: {
     ready(name) {
       this.players.push(name);
@@ -31,26 +68,6 @@ export default {
     attack(name, id) {
       this.$broadcast('attack', this.getPlayer(name), id);
     },
-  },
-
-  methods: {
-    getPlayer(name) {
-      return this.players[+!this.players.indexOf(name)];
-    },
-
-    getOriginPlayer(name) {
-      return this.players[this.players.indexOf(name)];
-    },
-  },
-
-  data() {
-    return {
-      players: [],
-    };
-  },
-
-  components: {
-    controller,
   },
 };
 </script>
