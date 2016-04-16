@@ -2,7 +2,7 @@
   <div class="panel" :style='{ width: computedWidth }' v-el:panel>
     {{ remaining }}
     <div v-for='column of rad' class="column">
-      <div v-for='row of rad' class="field" @click='shoot(column, row, $event.target)'> {{ column }} - {{ row }} </div>
+      <div v-for='row of rad' class="field" @click='shoot(column, row, $event.target)'> {{ ((column) * rad) + row + 1 }} </div>
     </div>
   </div>
 </template>
@@ -46,7 +46,7 @@ export default {
 
   computed: {
     computedWidth() {
-      return `${this.rad * 4}em`;
+      return `${this.rad * 2}em`;
     },
   },
 
@@ -108,8 +108,8 @@ export default {
 .field
   box-sizing border-box
   background #09f
-  width 4em
-  height 4em
+  width 2em
+  height @width
   color #fff
   cursor pointer
   border .1em solid #fff
