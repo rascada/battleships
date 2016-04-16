@@ -75,6 +75,9 @@ export default {
 <style lang='stylus'>
 @import '~flexstyl/flex'
 
+*
+  font-family 'Roboto Condensed', sans-serif
+
 body
   height 100vh
   margin 0
