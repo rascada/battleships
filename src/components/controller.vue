@@ -85,6 +85,8 @@ export default {
   flex column
   flex center
   margin auto
+  padding .25em
+  background #09f
 
 .dashboard
   background #333

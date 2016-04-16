@@ -1,34 +1,44 @@
 @import '~flexstyl/flex';
 @import '~simple-look/core/shadow'
 
+attacked()
+  background #09f - 50%
+
+  &.ship
+    background indianred
+    color #333
+
 .panel
   width 4em
   background #09f
   text-align center
 
-.field
-  box-sizing border-box
-  background #09f
-  cursor pointer
-  width 2em
-  height @width
-  margin .25em
-  color #fff
+  .field
+    box-sizing border-box
+    background #09f
+    cursor pointer
+    width 2em
+    height @width
+    margin .25em
+    transition .5s
+    color #fff
 
-  flex line
-  flex center
+    flex line
+    flex center
 
-.ship
-  border-radius 50%
-  background #fff
-  shadow .2
-  color #09f
+  .ship
+    border-radius 50%
+    background #fff
+    shadow .2
+    color #09f
 
-.attacked
-  background #09f - 50%
-  border-radius 50%
-  shadow .2
+  .attacked
+    attacked()
 
-  &.ship
-    background indianred
-    color #333
+  .attacked
+    border-radius 50%
+    shadow .2
+
+  &.offensive
+    .field:hover
+      attacked()

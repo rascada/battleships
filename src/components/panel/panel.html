@@ -1,5 +1,4 @@
-<div class="panel" :style='{ width: computedWidth }' v-el:panel>
-  {{ remaining }}
+<div class="panel {{ type }}" :style='{ width: computedWidth }' v-el:panel>
   <div v-for='column of rad' class="column">
     <div v-for='row of rad' class="field" @click='shoot(column, row, $event.target)'> {{ ((column) * rad) + row + 1 }} </div>
   </div>
