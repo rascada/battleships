@@ -17,10 +17,14 @@ export default {
 
   events: {
     shoot(id) {
+      const delay = 1000;
+
       this.$dispatch('attack', this.name, id);
+      this.$broadcast('moveDone', delay);
+
       setTimeout(() => {
         this.$dispatch('turn', this.name);
-      }, 1000);
+      }, delay);
     },
 
     turn(name, turn) {

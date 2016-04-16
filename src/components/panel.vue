@@ -5,6 +5,7 @@ export default {
   data() {
     return {
       ready: false,
+      moveDone: false,
       shoots: new Set(),
       ships: new Set(),
     };
@@ -24,6 +25,13 @@ export default {
       if (this.type === 'offensive') {
         $field.classList.add('ship');
       }
+    },
+
+    moveDone(delay) {
+      this.moveDone = true;
+      setTimeout(() => {
+        this.moveDone = false;
+      }, delay);
     },
 
     attack(target, pos) {
@@ -71,7 +79,7 @@ export default {
       if (this.type !== 'offensive') {
         this.setShip(id, $row);
         return;
-      } else if (!this.ready || !this.turn) return;
+      } else if (!this.ready || !this.turn || this.moveDone) return;
 
       if (!this.shoots.has(id)) {
         this.attack(id, $row, true);
