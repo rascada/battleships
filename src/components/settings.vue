@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="settings">
     <h1> ustawienia </h1>
     <div>
       <span> średnica pola walki </span>

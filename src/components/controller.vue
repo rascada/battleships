@@ -15,6 +15,23 @@ export default {
     maxShips: Number,
   },
 
+  components: {
+    panel,
+  },
+
+  ready() {
+    this.$dispatch('register', this.name);
+  },
+
+  data() {
+    return {
+      name: '',
+      msg: 'Ustaw swoje statki',
+      ready: false,
+      turn: false,
+    };
+  },
+
   events: {
     shoot(id) {
       const delay = 1000;
@@ -56,23 +73,6 @@ export default {
     attack(target) {
       return target === this.name;
     },
-  },
-
-  ready() {
-    this.$dispatch('register', this.name);
-  },
-
-  data() {
-    return {
-      name: '',
-      msg: 'Ustaw swoje statki',
-      ready: false,
-      turn: false,
-    };
-  },
-
-  components: {
-    panel,
   },
 };
 </script>

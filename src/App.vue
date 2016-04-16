@@ -78,10 +78,14 @@ export default {
 
 <style lang='stylus'>
 @import '~simple-look/register'
+@import '~simple-look/elements/card'
 @import '~flexstyl/flex'
 
 *
   font-family 'Roboto Condensed', sans-serif
+
+.controller, .settings
+  card()
 
 body
   height 100vh
