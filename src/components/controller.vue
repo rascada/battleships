@@ -1,7 +1,7 @@
 <template>
   <div v-show='msg || turn' class="controller">
-    <panel :turn='turn' :rad='rad' :max-ships='maxShips' type='offensive'></panel>
-    <div class='dashboard'> {{ msg }} {{ turn ? 'twój ruch' : '' }} {{ name }} </div>
+    <panel v-show='ready' :turn='turn' :rad='rad' :max-ships='maxShips' type='offensive'></panel>
+    <div class='dashboard'> {{ msg }} {{ name }} </div>
     <panel type='field' :rad='rad' :max-ships='maxShips'></panel>
   </div>
 </template>
@@ -25,6 +25,11 @@ export default {
       setTimeout(() => {
         this.$dispatch('turn', this.name);
       }, delay);
+    },
+
+    ready() {
+      this.ready = true;
+      return true;
     },
 
     turn(name, turn) {
@@ -61,6 +66,7 @@ export default {
     return {
       name: '',
       msg: 'Ustaw swoje statki',
+      ready: false,
       turn: false,
     };
   },
