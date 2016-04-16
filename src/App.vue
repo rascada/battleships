@@ -73,6 +73,7 @@ export default {
 </script>
 
 <style lang='stylus'>
+@import '~simple-look/register'
 @import '~flexstyl/flex'
 
 *

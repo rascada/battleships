@@ -30,7 +30,6 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
-@import '~simple/input'
 @import '~flexstyl/flex'
 
 h1
