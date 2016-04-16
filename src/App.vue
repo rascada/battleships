@@ -8,11 +8,6 @@ import controller from './components/controller';
 
 export default {
   events: {
-    register(name) {
-      // this.players.push(name);
-      console.log(name, 'register');
-    },
-
     ready(name) {
       this.players.push(name);
       if (this.players.length === 2) {
